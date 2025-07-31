@@ -12,7 +12,7 @@ import WalletModal from "@/components/wallet/wallet-modal" // Declare WalletModa
 export default function LandingPage() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [scrollY, setScrollY] = useState(0)
-  const { isConnected, isConnecting, openModal } = useWalletConnection()
+  const { isConnected, isConnecting, openModal, closeModal, isModalOpen } = useWalletConnection()
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY)
@@ -25,7 +25,7 @@ export default function LandingPage() {
       id: "1",
       name: "Coin Flip",
       description: "Classic heads or tails with crypto rewards",
-      image: "/placeholder.svg?height=200&width=300&text=Coin+Flip",
+      image: "",
       category: "classic",
       minBet: "0.001 ETH",
       maxWin: "10 ETH",
@@ -34,7 +34,7 @@ export default function LandingPage() {
       id: "2",
       name: "Mines",
       description: "Navigate the minefield for explosive wins",
-      image: "/placeholder.svg?height=200&width=300&text=Mines",
+      image: "",
       category: "classic",
       minBet: "0.005 ETH",
       maxWin: "50 ETH",
@@ -43,7 +43,7 @@ export default function LandingPage() {
       id: "3",
       name: "Crash",
       description: "Watch the multiplier soar, cash out before it crashes",
-      image: "/placeholder.svg?height=200&width=300&text=Crash",
+      image: "",
       category: "crash",
       minBet: "0.01 ETH",
       maxWin: "100 ETH",
@@ -52,7 +52,7 @@ export default function LandingPage() {
       id: "4",
       name: "Dice",
       description: "Roll the dice and predict the outcome",
-      image: "/placeholder.svg?height=200&width=300&text=Dice",
+      image: "",
       category: "classic",
       minBet: "0.001 ETH",
       maxWin: "25 ETH",
@@ -61,7 +61,7 @@ export default function LandingPage() {
       id: "5",
       name: "Roulette",
       description: "European roulette with crypto betting",
-      image: "/placeholder.svg?height=200&width=300&text=Roulette",
+      image: "",
       category: "table",
       minBet: "0.01 ETH",
       maxWin: "35 ETH",
@@ -70,7 +70,7 @@ export default function LandingPage() {
       id: "6",
       name: "Blackjack",
       description: "Beat the dealer in this classic card game",
-      image: "/placeholder.svg?height=200&width=300&text=Blackjack",
+      image: "",
       category: "table",
       minBet: "0.005 ETH",
       maxWin: "20 ETH",
@@ -79,7 +79,7 @@ export default function LandingPage() {
       id: "7",
       name: "Hi-Lo",
       description: "Guess if the next card is higher or lower",
-      image: "/placeholder.svg?height=200&width=300&text=Hi-Lo",
+      image: "",
       category: "classic",
       minBet: "0.001 ETH",
       maxWin: "15 ETH",
@@ -88,7 +88,7 @@ export default function LandingPage() {
       id: "8",
       name: "Plinko",
       description: "Drop the ball and watch it bounce to riches",
-      image: "/placeholder.svg?height=200&width=300&text=Plinko",
+      image: "",
       category: "lottery",
       minBet: "0.001 ETH",
       maxWin: "1000 ETH",
@@ -97,7 +97,7 @@ export default function LandingPage() {
       id: "9",
       name: "Keno",
       description: "Pick your lucky numbers and win big",
-      image: "/placeholder.svg?height=200&width=300&text=Keno",
+      image: "",
       category: "lottery",
       minBet: "0.001 ETH",
       maxWin: "500 ETH",
@@ -106,7 +106,7 @@ export default function LandingPage() {
       id: "10",
       name: "Limbo",
       description: "How low can you go? Higher multipliers, higher risk",
-      image: "/placeholder.svg?height=200&width=300&text=Limbo",
+      image: "",
       category: "classic",
       minBet: "0.001 ETH",
       maxWin: "∞",
@@ -270,7 +270,7 @@ export default function LandingPage() {
         </div>
 
         <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
-          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
+          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold mb-6 pb-6 bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
             The Future of
             <br />
             Crypto Gambling
@@ -357,7 +357,7 @@ export default function LandingPage() {
               Why Choose Us
             </h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              We're committed to providing the safest, fairest, and most rewarding crypto gambling experience.
+              We are committed to providing the safest, fairest, and most rewarding crypto gambling experience.
             </p>
           </div>
 
@@ -461,7 +461,7 @@ export default function LandingPage() {
       </footer>
 
       {/* Wallet Modal */}
-      <WalletModal isOpen={false} onClose={() => {}} />
+      <WalletModal isOpen={isModalOpen} onClose={closeModal} />
       {/* Connect Wallet Modal */}
       <ConnectWalletModal />
     </div>

@@ -4,6 +4,7 @@ import { useState } from "react"
 import { Play, TrendingUp, Coins } from "lucide-react"
 import { useWalletConnection } from "@/hooks/use-wallet-connection"
 import type { Game } from "@/types"
+import Image from "next/image"
 
 interface GameCardProps {
   game: Game
@@ -40,9 +41,11 @@ export default function GameCard({ game }: GameCardProps) {
       onMouseLeave={() => setIsHovered(false)}
     >
       <div className="relative h-48 overflow-hidden">
-        <img
-          src={game.image || "/placeholder.svg"}
+        <Image
+          src={game.image || "/placeholder.png"}
           alt={game.name}
+          width={400}
+          height={200}
           className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent" />
@@ -88,11 +91,10 @@ export default function GameCard({ game }: GameCardProps) {
 
         <button
           onClick={handlePlayClick}
-          className={`w-full font-semibold py-3 rounded-xl transition-all duration-200 hover:shadow-lg ${
-            isConnected
-              ? "bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-400 hover:to-blue-400 text-white hover:shadow-green-400/25"
-              : "bg-gray-700 hover:bg-gray-600 text-gray-300 hover:text-white"
-          }`}
+          className={`w-full font-semibold py-3 rounded-xl transition-all duration-200 hover:shadow-lg ${isConnected
+            ? "bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-400 hover:to-blue-400 text-white hover:shadow-green-400/25"
+            : "bg-gray-700 hover:bg-gray-600 text-gray-300 hover:text-white"
+            }`}
         >
           {isConnected ? "Play Now" : "Connect Wallet to Play"}
         </button>

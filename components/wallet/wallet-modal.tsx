@@ -1,8 +1,11 @@
+
 "use client"
 
 import { useState } from "react"
+import { Connector, useConnect } from "wagmi"
 import { X, Wallet, Shield } from "lucide-react"
 import type { WalletOption } from "@/types"
+import Image from "next/image"
 
 interface WalletModalProps {
   isOpen: boolean
@@ -11,31 +14,40 @@ interface WalletModalProps {
 
 export default function WalletModal({ isOpen, onClose }: WalletModalProps) {
   const [connecting, setConnecting] = useState<string | null>(null)
+  const { connect, connectors, error, isPending } = useConnect()
 
   const walletOptions: WalletOption[] = [
     {
       name: "MetaMask",
-      icon: "/placeholder.svg?height=40&width=40&text=MM",
+      icon: "/icons/metamask.svg",
       description: "Connect using MetaMask wallet",
     },
     {
       name: "WalletConnect",
-      icon: "/placeholder.svg?height=40&width=40&text=WC",
+      icon: "/icons/wallet-connect.svg",
       description: "Scan with WalletConnect to connect",
     },
     {
       name: "Coinbase Wallet",
-      icon: "/placeholder.svg?height=40&width=40&text=CB",
+      icon: "/icons/coinbase.svg",
       description: "Connect with Coinbase Wallet",
     },
   ]
 
   const handleConnect = async (walletName: string) => {
     setConnecting(walletName)
-    // Simulate connection delay
-    await new Promise((resolve) => setTimeout(resolve, 2000))
-    setConnecting(null)
-    onClose()
+    try {
+      // Find the connector by name
+      const connector = connectors.find((c: Connector) => c.name === walletName)
+      if (!connector) throw new Error("Connector not found")
+      await connect({ connector })
+      onClose()
+    } catch (e) {
+      // Optionally handle error
+      console.error(e)
+    } finally {
+      setConnecting(null)
+    }
   }
 
   if (!isOpen) return null
@@ -60,11 +72,17 @@ export default function WalletModal({ isOpen, onClose }: WalletModalProps) {
             <button
               key={wallet.name}
               onClick={() => handleConnect(wallet.name)}
-              disabled={connecting !== null}
+              disabled={connecting !== null || isPending}
               className="w-full p-4 bg-gray-800/50 hover:bg-gray-700/50 border border-gray-700 rounded-xl transition-all duration-200 hover:border-green-400/50 group disabled:opacity-50"
             >
               <div className="flex items-center space-x-4">
-                <img src={wallet.icon || "/placeholder.svg"} alt={wallet.name} className="w-10 h-10 rounded-lg" />
+                <Image
+                  src={wallet.icon || "/placeholder.png"}
+                  alt={wallet.name}
+                  width={40}
+                  height={40}
+                  className="w-10 h-10 rounded-lg"
+                />
                 <div className="flex-1 text-left">
                   <h3 className="text-white font-semibold group-hover:text-green-400 transition-colors">
                     {connecting === wallet.name ? "Connecting..." : wallet.name}
@@ -77,6 +95,9 @@ export default function WalletModal({ isOpen, onClose }: WalletModalProps) {
               </div>
             </button>
           ))}
+          {error && (
+            <div className="text-red-500 text-sm mt-2">{error.message}</div>
+          )}
         </div>
 
         <div className="mt-6 p-4 bg-blue-500/10 border border-blue-500/20 rounded-xl">

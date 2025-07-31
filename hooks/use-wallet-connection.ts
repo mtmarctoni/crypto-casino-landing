@@ -19,6 +19,7 @@ export function useWalletConnection() {
   })
 
   const handleConnect = async (connector: any) => {
+    console.log("Connecting with:", connector.name)
     try {
       setConnectingConnector(connector.name)
       await connect({ connector })
