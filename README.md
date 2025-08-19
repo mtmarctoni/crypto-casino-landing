@@ -1,52 +1,43 @@
 # Crypto Casino Landing Page
 
-[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com/mtmarctonis-projects/v0-saa-s-landing-page-design)
+[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com/mtmarctonis-projects/crypto-casino-landing)
 
-## Overview
+## Tech Stack & Architecture
 
-Crypto Casino Landing Page is a modern, responsive web3 landing page for a provably fair crypto gambling platform. Users can connect their wallets, view their profile and transaction history, and explore a variety of casino games built with blockchain technology.
+- **Framework:** [Next.js](https://nextjs.org/) (App Router, SSR, API routes)
+- **Language:** [TypeScript](https://www.typescriptlang.org/) (strict typing, interfaces)
+- **Styling:** [Tailwind CSS](https://tailwindcss.com/) (utility-first, custom config)
+- **Wallet Integration:** [wagmi](https://wagmi.sh/) (hooks, connectors for MetaMask, WalletConnect, Coinbase Wallet, Injected)
+- **State Management:** React hooks, context providers
+- **UI Components:** Modular, reusable components in `/components/ui` (accordion, dialog, toast, table, etc.)
+- **Custom Hooks:** `/hooks` for wallet connection, mobile detection, etc.
+- **Type Definitions:** Centralized in `/types` for games, features, wallet options
+- **Utility Functions:** Shared helpers in `/lib/utils.ts`
+- **Config:** Wagmi config in `/lib/wagmi-config.ts` (multi-chain, WalletConnect project ID)
+- **Assets:** SVG/PNG icons and placeholders in `/public/icons` and `/public`
 
-## Features
+## Developer Features
 
-- **Wallet Integration:** Connect with MetaMask, WalletConnect, Coinbase Wallet, and browser wallets using [wagmi](https://wagmi.sh/).
-- **Provably Fair Games:** Play classic and innovative games with cryptographically verifiable results.
-- **Multi-Crypto Support:** Play and withdraw with Bitcoin, Ethereum, and 20+ cryptocurrencies.
-- **Instant Payouts:** Withdraw winnings instantly to your wallet.
-- **VIP Rewards:** Earn bonuses and perks as you level up.
-- **User Dashboard:** View wallet profile, deposit/withdraw funds, and see recent transactions.
-- **Modern UI:** Built with Tailwind CSS and custom UI components for a beautiful experience.
-
-## Technologies
-
-- [Next.js](https://nextjs.org/) (App Router)
-- [TypeScript](https://www.typescriptlang.org/)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [wagmi](https://wagmi.sh/) (Wallet connection)
-
-## Games
-
-- Coin Flip
-- Mines
-- Crash
-- Dice
-- Roulette
-- Blackjack
+- **Hot Reloading:** Fast local development with `pnpm dev`
+- **Environment Variables:** Secure config for WalletConnect and chains
+- **Extensible UI:** Easily add new games, features, or wallet providers
+- **Accessibility:** Semantic HTML, keyboard navigation, focus management
+- **Responsive Design:** Mobile-first layouts, adaptive components
+- **Custom Theming:** Theme provider for dark/light mode
+- **Type Safety:** End-to-end TypeScript for reliability
+- **Testing Ready:** Modular structure for easy test integration
 
 ## Deployment
 
-Your project is live at:
-
-**[https://vercel.com/mtmarctonis-projects/v0-saa-s-landing-page-design](https://vercel.com/mtmarctonis-projects/v0-saa-s-landing-page-design)**
+Live at: [https://crypto-casino-landing.vercel.app/](https://crypto-casino-landing.vercel.app/)
 
 ## Getting Started
 
 1. Clone the repository
-2. Install dependencies with `pnpm install`
-3. Set up environment variables (see `lib/wagmi-config.ts` for WalletConnect)
-4. Run locally with `pnpm dev`
+2. Install dependencies: `pnpm install`
+3. Set up environment variables (see `lib/wagmi-config.ts`)
+4. Run locally: `pnpm dev`
 
-## How It Works
+---
 
-1. Connect your wallet to start playing
-2. Choose from a variety of games
-3. Play, win, and withdraw instantly
+For questions or contributions, open an issue or pull request.
