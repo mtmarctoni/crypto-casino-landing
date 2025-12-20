@@ -1,7 +1,7 @@
 // lib/wagmi-config.ts
 import { Config, createConfig, http } from 'wagmi'
 import { mainnet, base, arbitrum } from 'wagmi/chains'
-import { injected, metaMask, walletConnect } from 'wagmi/connectors'
+import { injected, walletConnect } from 'wagmi/connectors'
 
 let config: Config | null = null
 
@@ -18,7 +18,6 @@ export function getWagmiConfig() {
     chains: [mainnet, base, arbitrum],
     connectors: [
       injected(),
-      metaMask(),
       walletConnect({
         projectId,
         metadata: {
